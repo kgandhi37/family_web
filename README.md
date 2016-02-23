@@ -4,7 +4,7 @@
 
 ### So far:
 
-** 23/02/2016 **
+**23/02/2016**
 
 * Using a custom bootstrap theme called United to theme the front end for now to save time
 * Users can login, change password 

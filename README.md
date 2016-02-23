@@ -2,7 +2,11 @@
 
 ## New project currently in progress
 
-### So far:
+This a web app being built to allow family members to interact with each other online.
+
+It's a work in progress at the moment - please check back for updates.
+
+
 
 **23/02/2016**
 

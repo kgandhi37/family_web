@@ -35,7 +35,10 @@ def userlist():
 				if session.get('username') == target_user.username:
 					flash("You can't de-admin yourself")
 					return redirect(url_for('userlist'))
-				else:
+				elif target_user.username == "kishen":
+					flash("Sorry you can't de-admin Kishen, he runs things around here")
+					return redirect(url_for('userlist'))
+				else:	
 					target_user.is_admin = False
 					db.session.commit()
 					flash(target_user.username + " has been removed as Admin")

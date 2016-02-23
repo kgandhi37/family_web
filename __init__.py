@@ -11,4 +11,4 @@ migrate = Migrate(app, db)
 Markdown(app)
 
 from user import views
-from testimonial import views
+from main import views

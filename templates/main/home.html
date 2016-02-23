@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %} Hello World! {% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-offset-2 col-md-8">
+        
+        <div class="jumbotron"> 
+
+        <div class="panel panel-danger">
+		  	<div class="panel-heading">
+		    	<h3 class="panel-title">Welcome to your Homepage</h3>
+		  	</div>
+		  	<div class="panel-body">
+		    	Please keep checking back for updates
+		  	</div>
+		</div>
+
+        </div>
+
+        <br/>
+
+        <div class="well well-sm text-center">
+			<a href="{{ url_for('userlist') }}">List of Users</a>
+		</div>
+        
+        
+    </div>
+</div>
+{% endblock %}

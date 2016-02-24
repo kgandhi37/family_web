@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title> {% block title %}{% endblock %} </title>
-	<link rel="stylesheet" href="static/css/bootstrap.css" />
+	<link rel="stylesheet" href="../static/css/bootstrap.css" />
 </head>
 <body>
 
@@ -36,6 +36,8 @@
 		      	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Admin<span class="caret"></span></a>
 		      		<ul class="dropdown-menu">
 		            	<li><a href="{{ url_for('register') }}">Register User</a></li>
+		            	<li><a href="{{ url_for('location') }}">Locations</a></li>
+		            	<li><a href="{{ url_for('event') }}">Events</a></li>
 		          	</ul>
 		      	</li>
 		      	{% endif %}
@@ -45,6 +47,7 @@
 		          <ul class="dropdown-menu">
 		            <li><a href="{{ url_for('changepass') }}">Change Password</a></li>
 		            <li><a href="{{ url_for('userlist') }}">User List</a></li>
+		            
 		            <li role="separator" class="divider"></li>
 		            <li><a href="{{ url_for('logout')}}">Logout</a></li>
 		          </ul>

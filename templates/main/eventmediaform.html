@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %} Locations {% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-offset-2 col-md-8">
+        
+
+        <div class="panel panel-primary">
+		  	<div class="panel-heading">
+		    	<h3 class="panel-title text-center">Current Event</h3>
+		  	</div>
+		  	<div class="panel-body">
+		  		{{ event.location }} in Round {{ event.the_round }}.
+		  	</div>
+		</div>
+        
+
+        <div class="panel panel-primary">
+		  	<div class="panel-heading">
+		    	<h3 class="panel-title text-center">Add Media</h3>
+		  	</div>
+		  	<div class="panel-body">
+		    	{% if error %}
+		        <div class="error text-danger"> {{ error }}</div>
+		        {% endif %}
+		        <!-- Use template macros as you shouldn't be repeating yourself -->
+		        {% from "_formhelper.html" import render_field %}
+		        
+		        <form method="POST" action="{{ url_for('eventmedia', event_id=event.id) }}" role="form">
+		            
+		            <!-- csrf token -->
+		            {{ form.hidden_tag() }}
+		            
+		            {{ render_field(form.media_link, class='form-control') }}
+		            
+		            <button type="submit" class="btn btn-primary">Add Media</button>
+		            
+		        </form>
+		  	</div>
+		</div>
+
+        
+        
+        
+    </div>
+</div>
+{% endblock %}

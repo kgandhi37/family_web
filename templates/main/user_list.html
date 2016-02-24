@@ -13,6 +13,7 @@
         		<tr>
         			<th>User</th>
         			<th>Full Name</th>
+                    <th>Email</th>
         			{% if session.get('is_admin') == 1 %}
         			<th>Admin</th>
         			{% endif %}
@@ -28,6 +29,7 @@
         			<span class="text-primary"><strong>(Admin)</strong></span>
         			{% endif %}
         			</td>
+                    <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
         			{% if session.get('is_admin') == 1 %}
         			<td><a href="{{ url_for('userlist') }}?id={{ user.id }}">Add/Remove Admin</a></td>
         			{% endif %}

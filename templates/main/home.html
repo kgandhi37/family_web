@@ -1,23 +1,66 @@
 {% extends "base.html" %}
 
-{% block title %} Hello World! {% endblock %}
+{% block title %} Welcome {{ session.get('username')}} | GandhiWeb {% endblock %}
 
 {% block content %}
 <div class="row">
     <div class="col-md-offset-2 col-md-8">
-        
-        <div class="jumbotron"> 
+       
 
         <div class="panel panel-danger">
 		  	<div class="panel-heading">
-		    	<h3 class="panel-title">Welcome to your Homepage</h3>
+		    	<h3 class="panel-title">Welcome, {{ session.get('fullname') }}.</h3>
 		  	</div>
 		  	<div class="panel-body">
-		    	Please keep checking back for updates
+		    	{% if next_event == None %}
+		    	No events scheduled yet. Why not schedule one, ask an admin.
+		    	{% else %}
+		    	 <table class="table table-striped table-hover">
+		        	<tbody>
+
+		        		<tr>
+		        			<th>Next Event:</th>
+		        			<td>{{ next_event.location }}</td>      			
+		        		</tr>
+		        		<tr>
+		        			<th>Date:</th>
+		        			<td>{{ next_event.date }}</td>      			
+		        		</tr>
+		        		<tr>
+		        			<th>Theme:</th>
+		        			<td>{{ next_event.theme }}</td>      			
+		        		</tr>
+		        		<tr>
+		        			<th>Starters:</th>
+		        			<td>{{ next_event.starters }}</td>      			
+		        		</tr>
+		        		<tr>
+		        			<th>Drinks:</th>
+		        			<td>{{ next_event.drinks }}</td>      			
+		        		</tr>
+		        		<tr>
+		        			<th>Dessert:</th>
+		        			<td>{{ next_event.dessert }}</td>      			
+		        		</tr>
+		        		<tr>
+		        			<th>Disposables:</th>
+		        			<td>{{ next_event.disposables }}</td>      			
+		        		</tr>
+		        		<tr>
+		        			<th>Idol:</th>
+		        			<td>{{ next_event.idol }}</td>      			
+		        		</tr>
+		        		<tr>
+		        			<th>Additional Information:</th>
+		        			<td>{{ next_event.add_info }}</td>      			
+		        		</tr>
+
+		        		
+		        	</tbody>
+		        </table>
+		    	{% endif %}
 		  	</div>
 		</div>
-
-        </div>
 
         <br/>
 

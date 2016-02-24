@@ -18,4 +18,4 @@ class User(db.Model):
 		self.is_admin = is_admin
 
 	def __repr__(self):
-		return "<User %r>" % self.username
+		return self.username # representing it with self username, helps with QuerySelectField

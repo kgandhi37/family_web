@@ -19,8 +19,10 @@ def index():
 @require_login
 def home():
 	next_event = Event.query.order_by(Event.id.desc()).first()
+	idol = Idol.query.filter_by(event_id=next_event.id).first()
+	idol_id = idol.id
 	current_date = datetime.utcnow()
-	return render_template('main/home.html', next_event=next_event)
+	return render_template('main/home.html', next_event=next_event, idol_id=idol_id)
 
 @app.route('/userlist', methods=('GET', 'POST'))
 @require_login
@@ -120,7 +122,7 @@ def event():
 			db.session.flush()
 			# creating idol
 			if event.id:
-				event_idol=Idol(user, event)
+				event_idol=Idol(user, event) # adding whole query - auto gets the Primary Key
 				db.session.add(event_idol)
 				db.session.flush()
 			else:

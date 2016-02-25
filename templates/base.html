@@ -46,9 +46,12 @@
 		        <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Settings <span class="caret"></span></a>
 		          <ul class="dropdown-menu">
+		          	<li><a href="{{ url_for('testimonial') }}">Your Testimonials</a></li>
+		          	<li><a href="{{ url_for('idol') }}">Past idols</a></li>
+		          	<li role="seperator" class="divider"></li>
 		            <li><a href="{{ url_for('changepass') }}">Change Password</a></li>
 		            <li><a href="{{ url_for('userlist') }}">User List</a></li>
-		            <li><a href="{{ url_for('idol') }}">Past idols</a></li>
+		            
 		            <li role="separator" class="divider"></li>
 		            <li><a href="{{ url_for('logout')}}">Logout</a></li>
 		          </ul>

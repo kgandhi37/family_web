@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %} Testimonials - {{ session.get('fullname')}} {% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-offset-2 col-md-8">
+        
+        <div class="panel panel-primary">
+		  	<div class="panel-heading">
+		    	<h3 class="panel-title text-center">Add Testimonial</h3>
+		  	</div>
+		  	<div class="panel-body">
+		    	{% if error %}
+		        <div class="error text-danger"> {{ error }}</div>
+		        {% endif %}
+		        <!-- Use template macros as you shouldn't be repeating yourself -->
+		        {% from "_formhelper.html" import render_field %}
+		        
+		        <form method="POST" action="{{ url_for('add_testimonial', idol_id=idol_id) }}" role="form">
+		            
+		            <!-- csrf token -->
+		            {{ form.hidden_tag() }}
+		            
+		            {{ render_field(form.testimonial, class='form-control', rows='5') }}
+		            
+		            <button type="submit" class="btn btn-primary">Add Testimonial</button>
+		            
+		        </form>
+		  	</div>
+		</div>
+        
+    </div>
+</div>
+{% endblock %}

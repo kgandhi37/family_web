@@ -12,6 +12,7 @@
 		    	<h3 class="panel-title">Welcome, {{ session.get('fullname') }}.</h3>
 		  	</div>
 		  	<div class="panel-body">
+
 		    	{% if next_event == None %}
 		    	No events scheduled yet. Why not schedule one, ask an admin.
 		    	{% else %}
@@ -52,7 +53,7 @@
 		        		</tr>
 		        		<tr>
 		        			<th>Additional Information:</th>
-		        			<td>{{ next_event.add_info }}</td>      			
+		        			<td>{{ next_event.add_info | markdown }}</td>      			
 		        		</tr>
 
 		        		

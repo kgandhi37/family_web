@@ -24,7 +24,6 @@ def is_user_already_logged_in(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if session.get('username'):
-            flash("You are already logged in! Please logout first.")
-            return redirect(url_for('index'))
+            return redirect(url_for('home'))
         return f(*args, **kwargs)
     return decorated_function

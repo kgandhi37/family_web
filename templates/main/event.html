@@ -52,10 +52,14 @@
 		    	{% if error %}
 		        <div class="error text-danger"> {{ error }}</div>
 		        {% endif %}
+
 		        <!-- Use template macros as you shouldn't be repeating yourself -->
 		        {% from "_formhelper.html" import render_field %}
+
 		        
 		        <form method="POST" action="{{ url_for('event') }}" role="form">
+
+
 		            
 		            <!-- csrf token -->
 		            {{ form.hidden_tag() }}

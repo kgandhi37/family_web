@@ -10,15 +10,17 @@ import string
 
 @app.route('/')
 @app.route('/index')
+@is_user_already_logged_in
 def index():
-	if (session.get('username')):
-		return redirect(url_for('home'))
 	return render_template('main/index.html')
 
 @app.route('/home')
 @require_login
 def home():
 	next_event = Event.query.order_by(Event.id.desc()).first()
+	if not next_event:
+		flash("No events yet, please create the first event")
+		return redirect(url_for('event'))
 	idol = Idol.query.filter_by(event_id=next_event.id).first()
 	idol_id = idol.id
 	current_date = datetime.utcnow()
@@ -74,12 +76,22 @@ def location():
 		return redirect(url_for('location'))
 	return render_template('main/locations.html', form=form, locations=locations)
 
+@app.route('/view_events')
+@require_login
+def view_events():
+	events=Event.query.filter_by(live=True)
+	return render_template('main/view_events.html', events=events)
+
 @app.route('/event', methods=('GET', 'POST'))
 @require_login
 @require_user_admin
 def event():
 	form = EventForm()
 	events=Event.query.filter_by(live=True)
+	check_if_loc = Location.query.first()
+	if not check_if_loc:
+		flash("To create your first event, please first add a location!")
+		return redirect(url_for('location'))
 	if request.args.get('id'):
 		del_id = request.args.get('id')
 		event_to_del = Event.query.filter_by(id=del_id, live=True).first()
@@ -136,7 +148,8 @@ def event():
 				db.session.rollback()
 				flash("Error creating Event")
 
-	return render_template('main/event.html', form=form, events=events)
+	return render_template('main/event.html', form=form, events=events, action='new')
+
 
 @app.route('/eventmedia/<int:event_id>', methods=('GET', 'POST'))
 @require_login

@@ -19,6 +19,7 @@
 			  				<th>Event Host</th>
 			  				<th>Round</th>
 			  				<th>Date</th>
+			  				<th>View Testimonials</th>
 			  			</tr>
 			  		</thead>
 			  		<tbody>
@@ -28,6 +29,7 @@
 			    		<td>{{ idol.events.location }}</td>
 			    		<td>{{ idol.events.the_round }}</td>
 			    		<td>{{ idol.events.date }}</td>
+			    		<td><a href="{{url_for('idol_testimonials', idol_id=idol.id)}}">View Testimonials</a></td>
 			    	</tr>
 			    	{% endfor %}		        
 			        </tbody>

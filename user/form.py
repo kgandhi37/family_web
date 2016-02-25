@@ -37,3 +37,18 @@ class ChangePassForm(Form):
         validators.Length(min=4, max=80)
         ])
     confirm = PasswordField('Repeat Password')
+
+class LostPasswordForm(Form):
+    email = EmailField('Email', [validators.Required()])
+
+class ResetPasswordForm(Form):
+    email = EmailField('Email', [validators.Required()])
+    unique_code = StringField('Unique Code (check your email)', [
+        validators.Required()
+        ])
+    password = PasswordField('New Password',[
+        validators.Required(),
+        validators.EqualTo('confirm', message='Passwords must match'),
+        validators.Length(min=4, max=80)
+        ])
+    confirm = PasswordField('Repeat Password')

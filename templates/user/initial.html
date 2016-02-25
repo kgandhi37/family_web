@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %} Login! {% endblock %}
+{% block title %} Initialise App {% endblock %}
 
 {% block content %}
 <div class="row">
@@ -10,33 +10,34 @@
 
         <div class="panel panel-primary">
 		  	<div class="panel-heading">
-		    	<h3 class="panel-title text-center">Login !</h3>
+		    	<h3 class="panel-title text-center">Start App</h3>
 		  	</div>
 		  	<div class="panel-body">
+
+		  		<span class="text-primary"> Create your first user! </span>
 		    	{% if error %}
 		        <div class="error text-danger"> {{ error }}</div>
 		        {% endif %}
 		        <!-- Use template macros as you shouldn't be repeating yourself -->
 		        {% from "_formhelper.html" import render_field %}
 		        
-		        <form method="POST" action="{{ url_for('login') }}" role="form">
+		        <form method="POST" action="{{ url_for('initial') }}" role="form">
 		            
 		            <!-- csrf token -->
 		            {{ form.hidden_tag() }}
 		            
-		            {{ render_field(form.username, class='form-control', placeholder="Username") }} 
-		            {{ render_field(form.password, class='form-control', placeholder="Password") }}
+		            {{ render_field(form.fullname, class='form-control') }}
+		            {{ render_field(form.email, class='form-control') }}
+		            {{ render_field(form.username, class='form-control') }}
+		            {{ render_field(form.password, class='form-control') }}
+		            {{ render_field(form.confirm, class='form-control') }}
 		            
 		            
 		            
-		            <center><button type="submit" class="btn btn-primary" >Login</button></center>
+		            <button type="submit" class="btn btn-primary">Create</button>
 		            
 		        </form>
 		  	</div>
-		</div>
-
-		<div class="well well-sm text-center">
-			<a href="{{ url_for('lostpass') }}">Forgotten Password?</a>
 		</div>
 
         

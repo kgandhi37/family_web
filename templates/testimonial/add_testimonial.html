@@ -16,9 +16,16 @@
 		        {% endif %}
 		        <!-- Use template macros as you shouldn't be repeating yourself -->
 		        {% from "_formhelper.html" import render_field %}
+
+		        {% if action == 'new' %}
 		        
 		        <form method="POST" action="{{ url_for('add_testimonial', idol_id=idol_id) }}" role="form">
-		            
+		         
+		        {% else %}
+
+		        <form method="POST" action="{{ url_for('edit_testimonial', testimonial_id=testimonial.id) }}" role="form">
+
+		        {% endif %}
 		            <!-- csrf token -->
 		            {{ form.hidden_tag() }}
 		            

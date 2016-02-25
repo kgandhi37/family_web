@@ -5,6 +5,7 @@ from user.models import User
 from main.models import Location, Event
 from datetime import datetime
 from main.form import LocationForm, EventForm, EventMediaForm
+from testimonial.models import Idol
 import string
 
 @app.route('/')
@@ -76,10 +77,13 @@ def location():
 @require_user_admin
 def event():
 	form = EventForm()
-	events=Event.query
+	events=Event.query.filter_by(live=True)
 	if request.args.get('id'):
 		del_id = request.args.get('id')
-		Event.query.filter_by(id=del_id).delete()
+		event_to_del = Event.query.filter_by(id=del_id, live=True).first()
+		idol_to_del = Idol.query.filter_by(event_id=del_id, live=True).first()
+		event_to_del.live = False
+		idol_to_del.live = False
 		db.session.commit()
 		flash("Event Deleted")
 		return redirect(url_for('event'))
@@ -89,26 +93,47 @@ def event():
 		drinks = str(form.drinks.data)
 		dessert = str(form.dessert.data)
 		disposables = str(form.disposables.data)
-		if form.add_info.data:
-			add_info = form.add_info.data
+		idol = str(form.idol.data)
+		user = User.query.filter_by(username=idol).first()
+		idol_check=Idol.query.filter_by(user_id=user.id, live=True).first()
+		if idol_check:
+			flash("This person has already been the subject of an event, please choose someone else.")
+			return redirect(url_for('event'))
 		else:
-			add_info = "No Additional Information"
-		event = Event(
-			location,
-			form.the_round.data,
-			form.date.data,
-			form.theme.data,
-			starters,
-			drinks,
-			dessert,
-			disposables,
-			str(form.idol.data),
-			add_info
-			)
-		db.session.add(event)
-		db.session.commit()
-		flash("Event Added")
-		return redirect(url_for('event'))
+			if form.add_info.data:
+				add_info = form.add_info.data
+			else:
+				add_info = "No Additional Information"
+			event = Event(
+				location,
+				form.the_round.data,
+				form.date.data,
+				form.theme.data,
+				starters,
+				drinks,
+				dessert,
+				disposables,
+				idol,
+				add_info
+				)
+			db.session.add(event)
+			db.session.flush()
+			# creating idol
+			if event.id:
+				event_idol=Idol(user, event)
+				db.session.add(event_idol)
+				db.session.flush()
+			else:
+				db.session.rollback()
+				flash("Error creating Event")
+			if event.id and event_idol.id:
+				db.session.commit()
+				flash("Event Added")
+				return redirect(url_for('event'))
+			else:
+				db.session.rollback()
+				flash("Error creating Event")
+
 	return render_template('main/event.html', form=form, events=events)
 
 @app.route('/eventmedia/<int:event_id>', methods=('GET', 'POST'))

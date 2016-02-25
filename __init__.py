@@ -12,3 +12,4 @@ Markdown(app)
 
 from user import views
 from main import views
+from testimonial import views

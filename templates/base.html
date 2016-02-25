@@ -38,6 +38,7 @@
 		            	<li><a href="{{ url_for('register') }}">Register User</a></li>
 		            	<li><a href="{{ url_for('location') }}">Locations</a></li>
 		            	<li><a href="{{ url_for('event') }}">Events</a></li>
+		            	
 		          	</ul>
 		      	</li>
 		      	{% endif %}
@@ -47,7 +48,7 @@
 		          <ul class="dropdown-menu">
 		            <li><a href="{{ url_for('changepass') }}">Change Password</a></li>
 		            <li><a href="{{ url_for('userlist') }}">User List</a></li>
-		            
+		            <li><a href="{{ url_for('idol') }}">Past idols</a></li>
 		            <li role="separator" class="divider"></li>
 		            <li><a href="{{ url_for('logout')}}">Logout</a></li>
 		          </ul>

@@ -10,6 +10,11 @@ class User(db.Model):
 	password = db.Column(db.String(60)) # set to 60, using bcrypt
 	is_admin = db.Column(db.Boolean)
 
+
+	idols = db.relationship('Idol', backref='users', lazy='dynamic') # when backreferencing in templates etc use users
+	testimonials = db.relationship('Testimonial', backref='users', lazy='dynamic') # when backreferencing in templates etc use users
+	
+
 	def __init__(self, fullname, email, username, password, is_admin=False):
 		self.fullname = fullname
 		self.email = email

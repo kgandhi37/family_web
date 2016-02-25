@@ -5,8 +5,6 @@ class Location(db.Model):
 	location = db.Column(db.String(80))
 	address = db.Column(db.String(255))
 
-	# event=db.relationship('Event', backref=db.backref('location', lazy='dynamic'))
-
 	def __init__(self, location, address):
 		self.location = location
 		self.address = address
@@ -27,8 +25,12 @@ class Event(db.Model):
 	idol = db.Column(db.String(80))
 	add_info = db.Column(db.Text)
 	media_link = db.Column(db.String(255))
+	live = db.Column(db.Boolean)
 
-	def __init__(self, location, the_round, date, theme, starters, drinks, dessert, disposables, idol, add_info="None", media_link="#"):
+	idols = db.relationship('Idol', backref='events', lazy='dynamic') # when backreferencing in templates etc use events
+	testimonials = db.relationship('Testimonial', backref='events', lazy='dynamic')
+
+	def __init__(self, location, the_round, date, theme, starters, drinks, dessert, disposables, idol, add_info="None", media_link="#", live=True):
 		self.location = location
 		self.the_round = the_round
 		self.date = date
@@ -40,6 +42,7 @@ class Event(db.Model):
 		self.idol = idol
 		self.add_info = add_info
 		self.media_link = media_link
+		self.live = live
 
 	def __repr__(self):
 		return "<Event %r>" % self.id

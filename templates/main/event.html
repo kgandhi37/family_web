@@ -32,7 +32,7 @@
 			    		{% if event.media_link == "#" %}
 			    		No Media
 			    		{% else %}
-			    		<a href="http://{{ event.media_link }}">Link</a>
+			    		<a href="{{ event.media_link }}" target="_blank">Link</a>
 			    		{% endif %}
 			    		</td>
 			    		<td><a href="{{ url_for('event') }}?id={{ event.id }}">Delete</a> / <a href="{{ url_for('eventmedia', event_id=event.id) }}">Add Media</a></td>

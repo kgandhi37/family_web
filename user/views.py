@@ -4,10 +4,7 @@ from user.models import User
 from user.form import LoginForm, RegisterForm, ChangePassForm, LostPasswordForm, ResetPasswordForm
 from user.decorators import require_login, require_user_admin, is_user_already_logged_in
 from global_functions import send_email
-import string
-import random
-import bcrypt
-import socket
+import string, random, bcrypt, socket
 
 # random string function
 def pass_generator(size=8, chars=string.ascii_uppercase + string.digits + string.ascii_lowercase):

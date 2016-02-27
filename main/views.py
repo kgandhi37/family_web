@@ -6,7 +6,6 @@ from main.models import Location, Event
 from datetime import datetime
 from main.form import LocationForm, EventForm, EventMediaForm
 from testimonial.models import Idol
-import string
 
 @app.route('/')
 @app.route('/index')
@@ -23,7 +22,7 @@ def home():
 		return redirect(url_for('event'))
 	idol = Idol.query.filter_by(event_id=next_event.id).first()
 	idol_id = idol.id
-	current_date = datetime.utcnow()
+	# current_date = datetime.utcnow()
 	return render_template('main/home.html', next_event=next_event, idol_id=idol_id)
 
 @app.route('/userlist', methods=('GET', 'POST'))
